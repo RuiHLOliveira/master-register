@@ -36,7 +36,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ModalInsertLabel">Inserir função</h5>
+                    <h5 class="modal-title" id="ModalInsertLabel">Insert Daily Record</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -45,36 +45,37 @@
                     <div class="modal-body form-group">
                         <div class="row">
                             <div class="col">
-                                <label for="">Nome da função</label>
+                                <label for="description">Description</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="form-control">
+                                <input id="description" name="description" type="text" class="form-control">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <label for="">Horas de Desenvolvimento</label>
+                                <label for="hours">Hours</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input onkeypress="validate(event, true, ',')" class="form-control" id="devHoursInput" type="text">
+                                <input onkeypress="validate(event, true, ',')" class="form-control" id="hours" name="hours" type="text">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <label for="">Horas de Testes</label>
+                                <label for="task">Task</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input onkeypress="validate(event, true, ',')" class="form-control" id="testHoursInput" type="text">
+                                <input id="task" name="task" type="text" class="form-control">
                             </div>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeInsertButton">Close</button>

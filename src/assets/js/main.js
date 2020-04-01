@@ -1,39 +1,82 @@
-let features = [];
+let records = [];
 let valorHora = 0;
-/**
- * Carrega/refresh a coleção de features na tela
- */
-const loadFeatures = () => {
-  let list = '';
-  let records = features;
 
+
+
+/**
+ * Compare function that is used to order arrays of records.
+ * @param {object} a that contains an id numeric property. 
+ * @param {object} b that contains an id numeric property. 
+ */
+const orderByIdAsc = ( a, b ) => {
+  if ( a.id < b.id ){ return -1; }
+  if ( a.id > b.id ){ return 1; }
+  return 0;
+}
+
+
+
+/**
+ * Returns a truly copy of an object.
+ * @param {object} object 
+ */
+const deepCopy = (object) => {
+  let copy = JSON.parse(JSON.stringify(object));
+  return copy;
+}
+
+
+
+/**
+ * Generates an id based on the records object array.
+ */
+const generateRecordId = () => {
+  let myrecords = deepCopy(records);
+  if(myrecords.length === 0){
+    return 1;
+  }
+  let orderedRecords = myrecords.sort( orderByIdAsc );
+  const last = orderedRecords.pop();
+  return parseInt(last.id) + parseInt(1);
+}
+
+
+
+/**
+ * Loads/reloads the records object array on screen.
+ */
+const loadRecords = () => {
+  let list = '';
   records.forEach(recordItem => {
     let row = 
       `<tr>`+
         `<td>${recordItem.id}</td>`+
-        `<td>${recordItem.hours} h</td>`+
         `<td>${recordItem.description} h</td>`+
-        `<td>$ ${recordItem.taskId}</td>`+
+        `<td>${recordItem.task}</td>`+
+        `<td>${recordItem.hours} h</td>`+
       `</tr>`
     list += row;
   });
-
   let divComponent = document.getElementById('planilha');
   divComponent.innerHTML = 
     `<table class="table"><thead><tr>`+
     `<th>#</th>`+
-    `<th>Hours</th>`+
     `<th>Description</th>`+
     `<th>Task</th>`+
+    `<th>Hours</th>`+
     `</tr></thead><tbody>`+
     list+
     `</tbody></table>`;
 };
 
+
+
 const setValorHora = () => {
   valorHora = parseFloat(document.getElementById('valorhora').value);
   if(isNaN(valorHora)) valorHora = 0;
 }
+
+
 
 /**
  * Calcula e atualiza os valores do painel de totalizações.
@@ -41,22 +84,23 @@ const setValorHora = () => {
 const calcula = () => {
   let accDevHours = 0;
   let accTestHours = 0;
-  features.forEach((element) => {
+  records.forEach((element) => {
     accDevHours = parseFloat(accDevHours) + parseFloat(element.devHours);
     accTestHours = parseFloat(accTestHours) + parseFloat(element.testHours);
   });
   let valorTotal = parseFloat(valorHora) * (parseFloat(accDevHours) + parseFloat(accTestHours));
 
-  let featuresCount = (isNaN(features.length) ? '0' : features.length);
+  let recordsCount = (isNaN(records.length) ? '0' : records.length);
   accDevHours = (isNaN(accDevHours) ? '0' : accDevHours);
   accTestHours = (isNaN(accTestHours) ? '0' : accTestHours);
   valorTotal = (isNaN(valorTotal) ? '0' : valorTotal);
 
-  document.getElementById("resultFeatures").innerHTML = featuresCount;
+  // document.getElementById("resultrecords").innerHTML = recordsCount;
   document.getElementById("resultDevHours").innerHTML = accDevHours + ' h';
   document.getElementById("resultTestHours").innerHTML = accTestHours + ' h';
   document.getElementById("resultTotal").innerHTML = '$ ' + valorTotal;
 };
+
 
 
 const showDeleteButtons = (buttonList = null) => {
@@ -80,77 +124,59 @@ const toggleDeleteButtons = () => {
   }
 };
 
+
+
 const deleteFeature = (featureName, element, event) => {
   toggleDeleteButtons();
   let index = -1;
-  features.forEach(element => {
+  records.forEach(element => {
     if(element.feature === featureName){
-      index = features.indexOf(element);
+      index = records.indexOf(element);
     }
   });
-  features.splice(index,1);
+  records.splice(index,1);
   setValorHora();
-  loadFeatures();
+  loadRecords();
   calcula();
 };
 
+
+
 /**
- * Define comportamento no submit do form do modalInsert
+ * Insert modal onsubmit logic to insert a daily record.
  */
 const formInsertOnSubmit = (form) => {
   event.preventDefault();
-  const found = features.find(element => element.feature === form[0].value);
-  if(found !== undefined){
-    alert('Erro! Nome já existente! Mude o nome.');
-    return;
-  }
-  features.push({
-    'feature': form[0].value,
-    'devHours': parseFloat(form[1].value),
-    'testHours': parseFloat(form[2].value)
+  records.push({
+    'id': generateRecordId(),
+    'description': form[0].value,
+    'hours': parseFloat(form[1].value),
+    'task': form[2].value
   });
-  setValorHora();
-  loadFeatures();
-  calcula();
+  loadRecords();
   document.getElementById('closeInsertButton').click();
 };
+
+
 
 const formImportOnSubmit = async (form) => {
   event.preventDefault();
   await importar('fileimporter');
   setValorHora();
-  loadFeatures();
+  loadRecords();
   calcula();
   document.getElementById('closeImportButton').click();
 }
 
-/**
- * Onload da page
- */
-window.onload = (event) => {
-  loadFeatures();
-  let inputValorhora = document.getElementById('valorhora');
-  inputValorhora.addEventListener("keypress", function(event){
-    validate(event, true, ',');
-    // setValorHora();
-    // console.log(valorHora);
-    // calcula();
-  });
-  inputValorhora.addEventListener("keyup", function(event){
-    setValorHora();
-    console.log(valorHora);
-    calcula();
-    loadFeatures();
-  });
-};
+
 
 const exportar = () => {
-  downloadFile(JSON.stringify(features));
+  downloadFile(JSON.stringify(records));
 }
 
 const importar = async (elementId) => {
   let content = await readFile(elementId);
-  features = JSON.parse(content);
+  records = JSON.parse(content);
 }
 
 const downloadFile = (content, filename = 'file.txt') => {
@@ -195,19 +221,9 @@ const validate = (evt, float = false, separator = '.') => {
   }
 };
 
-// function calculate(){
-//   let horasDiarias = document.getElementById("horas").value.replace(',','.');
-//   let valorProjeto = document.getElementById("valor").value.replace(',','.');
-//   const diasEfetivos = document.getElementById("dias").value;
-//   const diasFerias = document.getElementById("ferias").value;
-//   // Conta para calcular valor da sua hora no projeto
-//   // By: danielhe4rt
-//   // let valorHora = (valorProjeto / (diasEfetivos * 4 * horasDiarias) ) + ( ( diasFerias * diasEfetivos * horasDiarias ) );
-//   //abaixo sugestão correção
-//   let valorHora = valorProjeto / ((diasEfetivos * horasDiarias) + ( diasFerias * diasEfetivos * horasDiarias) );
-
-//   //tratamentos
-//   valorHora = valorHora.toFixed(2);
-//   valorHora = valorHora.toString().replace('.',',');
-//   document.getElementById("result").innerHTML = 'R$ '+valorHora;
-// }
+/**
+ * Onload da page
+ */
+window.onload = (event) => {
+  loadRecords();
+};
