@@ -1,0 +1,259 @@
+* {
+    --he4rtPurple: #9163cc;
+    --he4rtPurpleShade: #6d4b9b;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body * {
+    font-family: 'Arimo', sans-serif;
+    font-family: 'Oxygen', sans-serif;
+    /* font-size: 0.8rem; */
+    box-sizing: border-box;
+    /* border: 1px dashed black; */
+}
+
+.form-group{
+    width: 100%;
+}
+.form-control{
+    flex-grow: 1;
+}
+
+/* text */
+/* body p {
+    font-size: 0.9rem;
+} */
+
+/* header{
+    margin-bottom: 24px;
+} */
+
+.margin10 * {
+    margin: 5px;
+}
+.header1 {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Arimo';
+    color: var(--he4rtPurple);
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.header2 {
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: 'Arimo';
+    font-weight: bold;
+}
+.subtitle {
+    text-align: center;
+    font-weight: bold;
+    color: var(--he4rtPurple);
+}
+
+.headerimg {
+    width: 400px;
+}
+
+.button {
+    background-color: var(--he4rtPurple);
+    color: white;
+    border-radius: 0;
+    flex-grow: 1;
+    /* margin: 0 10px; */
+    border: 0px;
+}
+.button:hover{
+    background-color: var(--he4rtPurpleShade);
+    color: white;
+}
+
+.container > * {
+    margin-bottom: 30px;
+}
+
+.footerimg {
+    width: 60px;
+    display: inline-block;
+}
+
+.cartao p {
+    color: white;
+    text-align: justify;
+}
+
+
+
+@media (min-width: 681px) {
+    /* .cartao {
+        padding: 30px 15px;
+        background-color: var(--he4rtPurple);
+        width: 310px;
+        box-shadow: 0 16px 48px rgba(23, 29, 36, 0.2);
+    } */
+
+    /* .flexdad {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .flexdad>* {
+        margin: 10px;
+        flex-grow: 0;
+        flex-shrink: 1;
+    }
+
+    .flexdadColumn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .flexdadColumn>* {
+        margin: 10px;
+        flex-grow: 0;
+        flex-shrink: 1;
+    } */
+}
+
+
+@media (max-width: 680px) {
+    /* .cartao {
+        padding: 30px 15px;
+        background-color: #9163cc;
+    } */
+
+    /* .flexdad {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .flexdad>* {
+        margin: 10px 0px;
+    }
+
+    .flexdadColumn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .flexdadColumn>* {
+        margin: 10px;
+        flex-grow: 0;
+        flex-shrink: 1; 
+    }*/
+}
+
+
+::-webkit-input-placeholder {
+    font-style: italic;
+    font-weight: lighter;
+}
+:-moz-placeholder {
+    font-style: italic;
+    font-weight: lighter;
+}
+::-moz-placeholder {
+    font-style: italic;
+    font-weight: lighter;
+}
+:-ms-input-placeholder {
+    font-style: italic;
+    font-weight: lighter;
+}
+
+/* flexdad */
+.flexdad {
+    display: flex;
+}
+
+/*  DIRECTION AND WRAP */
+.flexdad-row {
+    flex-direction: row;
+}
+.flexdad-column {
+    flex-direction: column;
+}
+.flexdad-wrap {
+    flex-wrap: wrap;
+}
+
+/* JUSTIFY */
+.justify-content-center {
+    justify-content: center;
+}
+.justify-content-spacebetween {
+    justify-content: space-between;
+}
+.justify-content-spacearound {
+    justify-content: space-around;
+}
+
+
+/* ALIGN ITEMS */
+.flexdad.align-items-center > *{
+    align-items: center;
+}
+.align-items-center {
+    align-items: center;
+}
+
+
+/* FLEX GROW */
+.flexdad-flexgrow1 > * {
+    flex-grow: 1;
+}
+.flexdad-flexgrow2 > * {
+    flex-grow: 2;
+}
+.flexdad-flexgrow3 > * {
+    flex-grow: 3;
+}
+.flexgrow0{
+    flex-grow: 0;
+}
+.flexgrow1 {
+    flex-grow: 1;
+}
+.flexgrow2 {
+    flex-grow: 2;
+}
+.flexgrow3 {
+    flex-grow: 3;
+}
+.flexdad > #planilha{
+    margin-right: 20px;
+}
+.hidden{
+    display: none;
+}
+
+footer {
+    /* background-color: #9163cc; */
+    /* color: white; */
+    font-weight: bold;
+    color: #9163cc;
+}
+footer a,
+footer a:hover {
+    color: #9163cc;
+}
+
+
+/* FLEX BASIS */
+.flexdad-basis > *{
+    flex-basis: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
