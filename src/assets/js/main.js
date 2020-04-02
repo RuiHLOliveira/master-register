@@ -159,6 +159,25 @@ const formInsertDailyRecordOnSubmit = (form) => {
 
 
 
+/**
+ * Insert Task modal onsubmit logic to insert a task.
+ */
+const formInsertTaskOnSubmit = (form) => {
+  event.preventDefault();
+  records.push({
+    'id': generateRecordId(),
+    'name': form[0].value,
+    'description': form[1].value,
+    'status': form[2].value
+  });
+  loadTasks();
+  document.getElementById('closeInsertTaskButton').click();
+};
+const loadTasks = () => {
+  alert('tem que implementar');
+}
+
+
 const formImportOnSubmit = async (form) => {
   event.preventDefault();
   await importar('fileimporter');

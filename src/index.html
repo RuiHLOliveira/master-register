@@ -86,18 +86,29 @@
         </div>
     </div>
     <!-- MODAL INSERT TASK -->
-    <div class="modal fade" id="ModalInsert" tabindex="-1" role="dialog" aria-labelledby="ModalInsertLabel"
+    <div class="modal fade" id="ModalInsertTask" tabindex="-1" role="dialog" aria-labelledby="ModalInsertTaskLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ModalInsertLabel">Insert Daily Record</h5>
+                    <h5 class="modal-title" id="ModalInsertTaskLabel">Insert Task</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" id="formInsert" onsubmit="formInsertOnSubmit(this, event)">
+                <form action="" id="formInsertTask" onsubmit="formInsertTaskOnSubmit(this, event)">
                     <div class="modal-body form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="name">Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input id="name" name="name" type="text" class="form-control">
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col">
                                 <label for="description">Description</label>
@@ -111,29 +122,18 @@
 
                         <div class="row">
                             <div class="col">
-                                <label for="hours">Hours</label>
+                                <label for="status">Status</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input onkeypress="validate(event, true, ',')" class="form-control" id="hours" name="hours" type="text">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <label for="task">Task</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <input id="task" name="task" type="text" class="form-control">
+                                <input id="status" name="status" type="text" class="form-control">
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeInsertButton">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeInsertTaskButton">Close</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
