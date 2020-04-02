@@ -30,7 +30,62 @@
         Link para nossa identidade visual
         https://imgur.com/a/WXy7lwN
     -->
-    <!-- MODAL INSERT -->
+    <!-- MODAL INSERT DAILY RECORD -->
+    <div class="modal fade" id="ModalInsertDailyRecord" tabindex="-1" role="dialog" aria-labelledby="ModalInsertLabelDailyRecord"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalInsertDailyRecordLabel">Insert Daily Record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" id="formInsertDailyRecord" onsubmit="formInsertDailyRecordOnSubmit(this, event)">
+                    <div class="modal-body form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="description">Description</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input id="description" name="description" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="hours">Hours</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input onkeypress="validate(event, true, ',')" class="form-control" id="hours" name="hours" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="task">Task</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input id="task" name="task" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeInsertDailyRecordButton">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL INSERT TASK -->
     <div class="modal fade" id="ModalInsert" tabindex="-1" role="dialog" aria-labelledby="ModalInsertLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -130,7 +185,7 @@
         <!-- row2 - default -->
         <div class="flexdad justify-content-spacebetween flexdad-flexgrow3" id="row2">
             <div class="flexdad flexdad-basis justify-content-spacearound">
-                <button type="button" class="button" data-toggle="modal" data-target="#ModalInsert">
+                <button type="button" class="button" data-toggle="modal" data-target="#ModalInsertDailyRecord">
                     Inserir
                 </button>
                 <button type="button" class="button" onclick="toggleDeleteButtons()">

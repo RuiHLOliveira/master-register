@@ -143,9 +143,9 @@ const deleteFeature = (featureName, element, event) => {
 
 
 /**
- * Insert modal onsubmit logic to insert a daily record.
+ * Insert Daily Record modal onsubmit logic to insert a daily record.
  */
-const formInsertOnSubmit = (form) => {
+const formInsertDailyRecordOnSubmit = (form) => {
   event.preventDefault();
   records.push({
     'id': generateRecordId(),
@@ -154,7 +154,7 @@ const formInsertOnSubmit = (form) => {
     'task': form[2].value
   });
   loadRecords();
-  document.getElementById('closeInsertButton').click();
+  document.getElementById('closeInsertDailyRecordButton').click();
 };
 
 
