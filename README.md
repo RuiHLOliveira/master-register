@@ -1,2 +1,0 @@
-# master-register
-Generic Register
